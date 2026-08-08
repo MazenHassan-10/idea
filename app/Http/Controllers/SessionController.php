@@ -15,8 +15,8 @@ class SessionController extends Controller
     public function store(Request $request)
     {
         $attribute = $request->validate([
-            'name' => ['required' , 'string' , 'min:3' , 'max:255'],
-            'email' => ['required' , 'string' , 'min:3' , 'max:255']
+            'email' => ['required' , 'string' , 'min:3' , 'max:255'],
+            'password' => ['required' , 'string' , 'min:8'],
         ]);
 
         if(! Auth::attempt($attribute))
@@ -26,7 +26,7 @@ class SessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended('/')->with('sucess' , 'you are now logged in.');
+        return redirect()->intended('/')->with('success' , 'you are now logged in.');
     }
     public function destroy()
     {
