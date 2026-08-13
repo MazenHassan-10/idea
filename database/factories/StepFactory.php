@@ -20,9 +20,9 @@ class StepFactory extends Factory
     {
 
         return [
-            'idea_id'=> Idea::factory() ,
+            'idea_id' => Idea::factory(),
             'description' => fake()->sentence(),
-            'completed' => false
+            'completed' => false,
         ];
     }
 }

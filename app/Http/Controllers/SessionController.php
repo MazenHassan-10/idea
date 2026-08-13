@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -15,19 +17,19 @@ class SessionController extends Controller
     public function store(Request $request)
     {
         $attribute = $request->validate([
-            'email' => ['required' , 'string' , 'min:3' , 'max:255'],
-            'password' => ['required' , 'string' , 'min:8'],
+            'email' => ['required', 'string', 'min:3', 'max:255'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
 
-        if(! Auth::attempt($attribute))
-        {
+        if (! Auth::attempt($attribute)) {
             return back()->withErrors(['password' => 'not match'])->withInput();
         }
 
         $request->session()->regenerate();
 
-        return redirect()->intended('/')->with('success' , 'you are now logged in.');
+        return redirect()->intended('/')->with('success', 'you are now logged in.');
     }
+
     public function destroy()
     {
         Auth::logout();
