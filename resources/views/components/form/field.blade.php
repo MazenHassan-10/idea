@@ -1,9 +1,29 @@
 @props(['label' , 'name' , 'type'=>'text'])
 
 <div class="space-y-2">
+    @if($label)
     <label for="{{ $name }}" class="label">{{ $label }}</label>
+    @endif
 
-    <input type="{{$type}}" class="input" id="{{ $name }}" name="{{ $name }}" value="{{ old($name) }}">
+    @if ($type === 'textarea')
+
+        <textarea
+        id="{{ $name }}"
+        name="{{ $name }}"
+        class="textarea"
+        {{ $attributes }}>{{ old($name) }}</textarea>
+    @else
+
+    <input 
+        type="{{$type}}"
+        name="{{$name}}"
+        id="{{$name}}"
+        value="{{ old($name) }}"
+        class="input"
+        {{ $attributes }}
+        >
+
+    @endif
 </div>
 
 @error($name)
