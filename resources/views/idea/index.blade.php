@@ -29,6 +29,16 @@
             <div class="grid md:grid-cols-2 gap-6">
                 @forelse($ideas as $idea)
                     <x-card href="/ideas/{{ $idea->id }}">
+
+                        @if ($idea->image_path)
+
+                        <div class="mb-4 -mx-4 -mt-4 rounded-t-lg overflow-hidden">
+                            <img src="{{ asset('storage/' . $idea->image_path) }}" alt=""
+                                 class="w-full h-48 object-cover">
+                        </div>
+
+                        @endif
+
                         <h3 class="text-foreground text-lg">{{ $idea->title }}</h3>
 
                         <x-idea.status-label status="{{ $idea->status }}">
@@ -56,7 +66,10 @@
                             newStep: '',
                             steps: [],
                         }"
-                    action="{{route('idea.store')}}" method="POST">
+                        action="{{route('idea.store')}}"
+                        method="POST"
+                        enctype="multipart/form-data"
+                    >
                     @csrf
 
                     <div class="space-y-6">
@@ -90,12 +103,18 @@
                             type="textarea"
                             placeholder="Enter your description...."
                         />
+                        <div class="space-y-2">
+                            <label for="image" class="label">Featured Image</label>
+
+                            <input type="file" name="image" accept="image/">
+                            
+                        </div>
                         <div>
                             <fieldset class="space-y-3">
                                 <legend class="label">Steps</legend>
-                                
+
                                 <template x-for="(step , index) in steps">
-                                    
+
                                     <div class="flex gap-x-2 items-center">
 
                                     <input name="steps[]" x-model="step" class="input">
@@ -108,7 +127,7 @@
                                         >-</button>
                                     </div>
                                 </template>
-                            
+
                                 <div class="flex gap-x-2 items-center">
                                     <input
                                         x-model="newStep"
@@ -130,9 +149,9 @@
                         <div>
                             <fieldset class="space-y-3">
                                 <legend class="label">Links</legend>
-                                
+
                                 <template x-for="(link , index) in links">
-                                    
+
                                     <div class="flex gap-x-2 items-center">
 
                                     <input name="links[]" x-model="link" class="input">

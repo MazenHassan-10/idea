@@ -9,6 +9,11 @@ use App\Models\User;
 
 class IdeaPolicy
 {
+    public function workWith(User $user, Idea $idea): bool
+    {
+        return $idea->user->is($user);
+    }
+
     /**
      * Determine whether the user can view any models.
      */
