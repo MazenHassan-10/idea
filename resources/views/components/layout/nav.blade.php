@@ -7,8 +7,9 @@
         </div>
 
         <div class="flex gap-x-5">
-        
+
         @auth
+            <a class="btn btn-outlined" href="{{ route('profile.edit') }}">Edit Profile</a>
             <form method="POST" action="/logout">
              @csrf
                 <button class="btn">Log Out</button>
@@ -16,7 +17,7 @@
         @endauth
         @guest
             <a href="/register" class="btn">Register</a>
-            <a href="/login">Sign In</a> 
+            <a href="/login">Sign In</a>
         @endguest
         </div>
     </div>
