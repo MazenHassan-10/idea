@@ -77,9 +77,7 @@ database/
 └── migrations/         # Database schema
 resources/views/        # Blade templates
 tests/                  # Pest tests
-## Screenshots
 
-_Add screenshots of the app here._
 
 ## What I Learned
 
